@@ -19,7 +19,7 @@ pipeline {
                 }
                 stage('Test') {
                     steps {
-			sh '/opt/conda/bin/jupyter-book --version' 
+			sh 'which jupyter-book && jupyter-book --version' 
                         sh 'podman run -it --rm --pull=never localhost/$IMAGE_NAME python -c "import scipy; import numpy; import pandas; import sklearn; import matplotlib; import seaborn; import fmriprep; import nilearn; import nipype; import nibabel; import fsleyes; import datalad; import nltools; import hypertools; import networkx; import pynv; import bids"'
                         sh 'podman run -d --name=$IMAGE_NAME --rm --pull=never -p 8888:8888 localhost/$IMAGE_NAME start-notebook.sh --NotebookApp.token="jenkinstest"'
                         sh 'sleep 10 && curl -v http://localhost:8888/lab?token=jenkinstest 2>&1 | grep -P "HTTP\\S+\\s200\\s+[\\w\\s]+\\s*$"'
