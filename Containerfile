@@ -6,7 +6,8 @@ USER root
 
 #RUN mamba install -y astropy <libraries>
 
-RUN pip install jupyter-book \
+RUN pip install attrdict \
+    jupyter-book \
     pybids \
     pynv \
     nipype \
