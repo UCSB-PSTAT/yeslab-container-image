@@ -4,7 +4,7 @@ pipeline {
         upstream(upstreamProjects: 'UCSB-PSTAT GitHub/jupyter-base/main', threshold: hudson.model.Result.SUCCESS)
     }
     environment {
-        IMAGE_NAME = '<COURSE/IMAGE ID HERE>'
+        IMAGE_NAME = 'yeslab'
     }
     stages {
         stage('Build Test Deploy') {
@@ -19,10 +19,11 @@ pipeline {
                 }
                 stage('Test') {
                     steps {
-                        //sh 'podman run -it --rm --pull=never localhost/$IMAGE_NAME python -c "import <library>;"'
+                        sh 'podman run -it --rm --pull=never localhost/$IMAGE_NAME python -c "import scipy; import numpy; import pandas; import sklearn; import matplotlib; import seaborn; import fmriprep; import nilearn; import nipype; import nibabel; import fsleyes; import datalad; import nltools; import hypertools; import networkx; import pynv; import bids"'
                         sh 'podman run -d --name=$IMAGE_NAME --rm --pull=never -p 8888:8888 localhost/$IMAGE_NAME start-notebook.sh --NotebookApp.token="jenkinstest"'
                         sh 'sleep 10 && curl -v http://localhost:8888/lab?token=jenkinstest 2>&1 | grep -P "HTTP\\S+\\s200\\s+[\\w\\s]+\\s*$"'
                         sh 'curl -v http://localhost:8888/tree?token=jenkinstest 2>&1 | grep -P "HTTP\\S+\\s200\\s+[\\w\\s]+\\s*$"'
+                        sh 'podman run -it --rm --pull=never localhost/$IMAGE_NAME which jupyter-book'
                     }
                     post {
                         always {
