@@ -4,10 +4,7 @@ MAINTAINER LSIT Systems <lsitops@lsit.ucsb.edu>
 
 USER root
 
-#RUN mamba install -y astropy <libraries>
-
-RUN pip install attrdict \
-    jupyter-book \
+RUN pip install jupyter-book \
     pybids \
     pynv \
     nipype \
@@ -15,7 +12,9 @@ RUN pip install attrdict \
     networkx \
     hypertools \
     datalad \
-    fmriprep \
-    fsleyes
+    fmriprep 
+    #fsleyes
+
+RUN mamba install -y fsleyes
 
 USER $NB_USER
