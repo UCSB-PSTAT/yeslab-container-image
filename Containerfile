@@ -13,7 +13,6 @@ RUN pip install jupyter-book \
     hypertools \
     datalad \
     fmriprep 
-    #fsleyes
 
 RUN mamba install -y fsleyes
 
