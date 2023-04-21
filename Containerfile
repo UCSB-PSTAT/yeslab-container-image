@@ -7,6 +7,9 @@ USER root
 RUN pip install jupyter-book \
     pybids \
     pynv \
+    dcm2niix \
+    dcm2bids \
+    heudiconv[all] \
     nipype \
     nltools \
     networkx \
