@@ -4,19 +4,21 @@ MAINTAINER LSIT Systems <lsitops@lsit.ucsb.edu>
 
 USER root
 
-RUN pip install jupyter-book \
-    pybids \
-    pynv \
-    dcm2niix \
-    dcm2bids \
-    heudiconv[all] \
-    nipype \
+RUN conda install -y \
+    datalad\
+    dcm2bids\
+    dcm2niix\
+    fsleyes\
+    heudiconv\
+    jupyter-book\
+    networkx\
+    nipype\
+    pybids\
+    pynv
+   
+RUN pip install -y\
     nltools \
-    networkx \
     hypertools \
-    datalad \
-    fmriprep 
-
-RUN mamba install -y fsleyes
+    fmriprep
 
 USER $NB_USER
