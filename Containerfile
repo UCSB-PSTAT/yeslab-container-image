@@ -20,4 +20,7 @@ RUN python3 -m pip install --no-cache-dir \
     fmriprep \
     pynv
 
+# Force install nltools without letting its outdated constraints break Python 3.13
+RUN python3 -m pip install --no-cache-dir --no-deps nltools
+
 USER $NB_USER
